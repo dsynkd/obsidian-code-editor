@@ -3,7 +3,7 @@ import { TextFileView, TFile, WorkspaceLeaf } from "obsidian";
 import { viewType } from "./common";
 import CodeFilesPlugin from "./main";
 import * as monaco from 'monaco-editor'
-import { getLanguage, getThemeColor, genEditorSettings } from "./ObsidianUtils";
+import { getLanguage, genEditorSettings } from "./ObsidianUtils";
 import { attachVimMode, MonacoVimAdapter, prepareMonacoHost } from "./monacoVim";
 
 

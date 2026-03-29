@@ -34,6 +34,95 @@
 
 .code-editor-vim-status input {
 	background: none;
-    box-shadow: none;
+    box-shadow: none !important;
     border: none;
+	height: 1.4em !important;
+}
+
+/* Map Obsidian variables onto Monaco's VS Code theme variables (no JS theme building). */
+.view-content div.monaco-editor,
+.view-content div.monaco-diff-editor {
+	--vscode-foreground: var(--text-normal);
+	--vscode-disabledForeground: var(--text-faint);
+	--vscode-descriptionForeground: var(--text-muted);
+	--vscode-icon-foreground: var(--text-muted);
+	--vscode-focusBorder: var(--interactive-accent);
+	--vscode-errorForeground: var(--color-red, #e03131);
+	--vscode-editorWarning-foreground: var(--color-orange, #946300);
+	--vscode-editorInfo-foreground: var(--color-blue, var(--text-accent));
+
+	--vscode-editor-background: var(--background-primary);
+	--vscode-editor-foreground: var(--code-normal, var(--text-normal));
+	--vscode-editorStickyScroll-background: var(--background-secondary);
+	--vscode-editorStickyScrollHover-background: var(--background-modifier-hover);
+	--vscode-editorGutter-background: var(--background-primary);
+	--vscode-editorLineNumber-foreground: var(--text-faint);
+	--vscode-editorLineNumber-activeForeground: var(--text-muted);
+	--vscode-editorActiveLineNumber-foreground: var(--text-normal);
+	--vscode-editorCursor-foreground: var(--interactive-accent);
+
+	--vscode-editor-selectionBackground: var(
+		--text-selection,
+		var(--background-modifier-selected)
+	);
+	--vscode-editor-inactiveSelectionBackground: var(--background-modifier-hover);
+	--vscode-editor-selectionHighlightBackground: color-mix(
+		in srgb,
+		var(--interactive-accent) 18%,
+		transparent
+	);
+
+	--vscode-editorWhitespace-foreground: var(--text-faint);
+	--vscode-editorIndentGuide-background: var(--background-modifier-border);
+	--vscode-editorIndentGuide-activeBackground: var(--interactive-accent);
+	--vscode-editorRuler-foreground: var(--background-modifier-border);
+
+	--vscode-scrollbarSlider-background: var(
+		--scrollbar-thumb,
+		var(--background-modifier-border)
+	);
+	--vscode-scrollbarSlider-hoverBackground: var(
+		--scrollbar-thumb-hover,
+		var(--background-modifier-border-hover)
+	);
+	--vscode-scrollbarSlider-activeBackground: color-mix(
+		in srgb,
+		var(--interactive-accent) 45%,
+		transparent
+	);
+
+	--vscode-minimap-background: var(--background-primary);
+	--vscode-minimapSlider-background: color-mix(
+		in srgb,
+		var(--text-muted) 28%,
+		transparent
+	);
+	--vscode-minimapSlider-hoverBackground: color-mix(
+		in srgb,
+		var(--text-muted) 42%,
+		transparent
+	);
+	--vscode-minimapSlider-activeBackground: color-mix(
+		in srgb,
+		var(--interactive-accent) 32%,
+		transparent
+	);
+
+	--vscode-editorWidget-background: var(--background-secondary);
+	--vscode-editorWidget-foreground: var(--text-normal);
+	--vscode-editorWidget-border: var(--background-modifier-border);
+
+	--vscode-editorSuggestWidget-background: var(--background-secondary);
+	--vscode-editorSuggestWidget-foreground: var(--text-normal);
+	--vscode-editorSuggestWidget-border: var(--background-modifier-border);
+	--vscode-editorSuggestWidget-selectedBackground: var(--background-modifier-hover);
+	--vscode-editorSuggestWidget-selectedForeground: var(--text-normal);
+	--vscode-editorSuggestWidget-highlightForeground: var(--text-accent);
+
+	--vscode-editorHoverWidget-background: var(--background-secondary);
+	--vscode-editorHoverWidget-foreground: var(--text-normal);
+	--vscode-editorHoverWidget-border: var(--background-modifier-border);
+
+	--vscode-quickInput-background: var(--background-secondary);
+	--vscode-quickInput-foreground: var(--text-normal);
 }

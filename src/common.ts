@@ -7,7 +7,6 @@ export interface EditorSettings {
 	minimap: boolean;
 	semanticValidation: boolean;
 	syntaxValidation: boolean;
-	themeColor: string;
 	fontSize: number;
 	fontFamily: string;
 	fontLigatures: boolean;
@@ -22,7 +21,6 @@ export const DEFAULT_SETTINGS: EditorSettings = {
 	minimap: true,
 	semanticValidation: true,
 	syntaxValidation: true,
-	themeColor: "AUTO",
 	fontSize: 14,
 	fontFamily: "'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace",
 	fontLigatures: true,

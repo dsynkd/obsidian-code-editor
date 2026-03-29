@@ -1,5 +1,7 @@
 import { Plugin } from "obsidian";
+import * as monaco from "monaco-editor";
 import { DEFAULT_SETTINGS, EditorSettings } from "./common";
+import { getMonacoBaseTheme } from "./ObsidianUtils";
 import { CodeEditorView } from "./codeEditorView";
 import { CreateCodeFileModal } from "./createCodeFileModal";
 import { CodeFilesSettingsTab } from "./codeFilesSettingsTab";
@@ -36,6 +38,12 @@ export default class CodeFilesPlugin extends Plugin {
 
 	async onload() {
 		await this.loadSettings();
+
+		this.registerEvent(
+			this.app.workspace.on("css-change", () => {
+				monaco.editor.setTheme(getMonacoBaseTheme());
+			}),
+		);
 
 		this.registerView(viewType, leaf => new CodeEditorView(leaf, this));
 

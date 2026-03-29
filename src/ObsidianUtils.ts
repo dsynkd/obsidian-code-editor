@@ -1,19 +1,8 @@
 import { EditorSettings } from "./common";
-import * as monaco from 'monaco-editor'
+import * as monaco from "monaco-editor";
 
-
-export const isObsidianThemeDark = () => document.body.classList.contains("theme-dark");
-
-export function getThemeColor(themeColor: string): string {
-    let theme: string = "vs";
-    if (themeColor === "AUTO") {
-        theme = isObsidianThemeDark() === true ? "vs-dark" : "vs";
-    } else if (themeColor === "DARK") {
-        theme = "vs-dark";
-    } else if (themeColor === "LIGHT") {
-        theme = "vs";
-    }
-    return theme;
+export function getMonacoBaseTheme(): "vs" | "vs-dark" {
+	return document.body.classList.contains("theme-dark") ? "vs-dark" : "vs";
 }
 
 export function genEditorSettings(setting: EditorSettings, language: string, minimap: boolean = true, wordwrap: boolean = false) {
@@ -33,7 +22,7 @@ export function genEditorSettings(setting: EditorSettings, language: string, min
     let settings: monaco.editor.IStandaloneEditorConstructionOptions = {
         automaticLayout: true,
         language: getLanguage(language),
-        theme: getThemeColor(setting.themeColor),
+        theme: getMonacoBaseTheme(),
         lineNumbers: setting.lineNumbers ? "on" : "off",
         wordWrap: wordwrapFlag ? "on" : "off",
         minimap: minmap,

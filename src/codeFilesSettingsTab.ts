@@ -1,6 +1,5 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import CodeFilesPlugin from "./main";
-import { THEME_COLOR, THEME_COLOR_LABELS } from "./constants";
 
 export class CodeFilesSettingsTab extends PluginSettingTab {
 	plugin: CodeFilesPlugin;
@@ -16,23 +15,6 @@ export class CodeFilesSettingsTab extends PluginSettingTab {
 		containerEl.empty();
 
 		containerEl.createEl("h2", { text: "Code editor settings" });
-
-		new Setting(containerEl)
-			.setName("Base color")
-			.setDesc(
-				"Choose a base color for the code editor, the base color defaults to follow the base color of obsidian.",
-			)
-			.addDropdown(async (dropdown) => {
-				for (const key in THEME_COLOR) {
-					const k = key as keyof typeof THEME_COLOR;
-					dropdown.addOption(k, THEME_COLOR_LABELS[k]);
-				}
-				dropdown.setValue(this.plugin.settings.themeColor);
-				dropdown.onChange(async (option) => {
-					this.plugin.settings.themeColor = option;
-					await this.plugin.saveSettings();
-				});
-			});
 
 		let fontSizeText: HTMLDivElement;
 		new Setting(containerEl)
