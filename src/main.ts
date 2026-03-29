@@ -4,7 +4,7 @@ import { DEFAULT_SETTINGS, EditorSettings } from "./common";
 import { getMonacoBaseTheme } from "./ObsidianUtils";
 import { CodeEditorView } from "./codeEditorView";
 import { CreateCodeFileModal } from "./createCodeFileModal";
-import { CodeFilesSettingsTab } from "./codeFilesSettingsTab";
+import { CodeFilesSettingsTab } from "./settings";
 import { viewType } from "./common";
 import { FenceEditModal } from "./fenceEditModal";
 import { FenceEditContext } from "./fenceEditContext";

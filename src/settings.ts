@@ -14,8 +14,6 @@ export class CodeFilesSettingsTab extends PluginSettingTab {
 
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: "Code editor settings" });
-
 		let fontSizeText: HTMLDivElement;
 		new Setting(containerEl)
 			.setName("Font size")
@@ -36,16 +34,6 @@ export class CodeFilesSettingsTab extends PluginSettingTab {
 				el.style.textAlign = "right";
 				el.innerText = " " + this.plugin.settings.fontSize.toString();
 			});
-
-		new Setting(containerEl)
-			.setName("Font family")
-			.setDesc("Set the font family of the code editor.")
-			.addTextArea(text => text
-				.setValue(this.plugin.settings.fontFamily)
-				.onChange(async (value) => {
-					this.plugin.settings.fontFamily = value;
-					await this.plugin.saveSettings();
-				})).setClass("setting_ext");
 
 		new Setting(containerEl)
 			.setName("Font ligatures")

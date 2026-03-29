@@ -8,7 +8,6 @@ export interface EditorSettings {
 	semanticValidation: boolean;
 	syntaxValidation: boolean;
 	fontSize: number;
-	fontFamily: string;
 	fontLigatures: boolean;
 	vimMode: boolean;
 }
@@ -22,7 +21,6 @@ export const DEFAULT_SETTINGS: EditorSettings = {
 	semanticValidation: true,
 	syntaxValidation: true,
 	fontSize: 14,
-	fontFamily: "'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace",
 	fontLigatures: true,
 	vimMode: false,
 }

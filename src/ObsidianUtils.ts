@@ -28,7 +28,7 @@ export function genEditorSettings(setting: EditorSettings, language: string, min
         minimap: minmap,
         folding: setting.folding,
         fontSize: setting.fontSize,
-        fontFamily: setting.fontFamily,
+        fontFamily: "var(--font-monospace)",
         fontLigatures: setting.fontLigatures,
         // Controls whether characters are highlighted that can be confused with basic ASCII characters
         unicodeHighlight: { ambiguousCharacters: false, invisibleCharacters: false },
