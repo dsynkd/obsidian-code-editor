@@ -4,12 +4,14 @@ import { viewType } from "./common";
 import CodeFilesPlugin from "./main";
 import * as monaco from 'monaco-editor'
 import { getLanguage, getThemeColor, genEditorSettings } from "./ObsidianUtils";
+import { attachVimMode, MonacoVimAdapter, prepareMonacoHost } from "./monacoVim";
 
 
 export class CodeEditorView extends TextFileView {
 
 	value = "";
 	monacoEditor: monaco.editor.IStandaloneCodeEditor;
+	private vimAdapter: MonacoVimAdapter | null = null;
 
 
 	constructor(leaf: WorkspaceLeaf, private plugin: CodeFilesPlugin) {
@@ -26,7 +28,9 @@ export class CodeEditorView extends TextFileView {
 	async onLoadFile(file: TFile) {
 
 		let setting = genEditorSettings(this.plugin.settings, this.file?.extension ?? "");
-		this.monacoEditor = monaco.editor.create(this.contentEl, setting);
+		const { host, statusBar } = prepareMonacoHost(this.contentEl, this.plugin.settings.vimMode);
+		this.monacoEditor = monaco.editor.create(host, setting);
+		this.vimAdapter = attachVimMode(this.monacoEditor, statusBar);
 
 		this.monacoEditor.onDidChangeModelContent(() => {
 			this.requestSave();
@@ -43,6 +47,8 @@ export class CodeEditorView extends TextFileView {
 	async onUnloadFile(file: TFile) {
 		window.removeEventListener('keydown', this.keyHandle, true);
 		await super.onUnloadFile(file);
+		this.vimAdapter?.dispose();
+		this.vimAdapter = null;
 		this.monacoEditor.dispose();
 	}
 
@@ -96,6 +102,21 @@ export class CodeEditorView extends TextFileView {
 		if (!this.monacoEditor.hasTextFocus())
 			return;
 
+		if (event.altKey) {
+			if (event.key === 'z') {
+				this.plugin.settings.wordWrap = !this.plugin.settings.wordWrap;
+				this.plugin.saveSettings();
+				this.monacoEditor.updateOptions({
+					wordWrap: this.plugin.settings.wordWrap ? "on" : "off",
+				})
+
+			}
+		}
+
+		if (this.plugin.settings.vimMode) {
+			return;
+		}
+
 		const ctrlMap = new Map<string, string>([
 			['f', 'actions.find'],
 			['h', 'editor.action.startFindReplaceAction'],
@@ -119,18 +140,6 @@ export class CodeEditorView extends TextFileView {
 				else {
 					this.monacoEditor.trigger('source', triggerName, null);
 				}
-			}
-		}
-
-
-		if (event.altKey) {
-			if (event.key === 'z') {
-				this.plugin.settings.wordWrap = !this.plugin.settings.wordWrap;
-				this.plugin.saveSettings();
-				this.monacoEditor.updateOptions({
-					wordWrap: this.plugin.settings.wordWrap ? "on" : "off",
-				})
-
 			}
 		}
 

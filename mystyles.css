@@ -15,3 +15,25 @@
 .setting_ext textarea{
     height: 6rem !important;
 }
+
+.vscode-editor-monaco-host {
+	position: relative;
+}
+
+.vscode-editor-vim-status {
+	flex-shrink: 0;
+	font-family: var(--font-monospace);
+	font-size: 0.85em;
+	padding: 2px 6px;
+	border-top: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+	color: var(--text-muted);
+	min-height: 1.4em;
+	line-height: 1.4;
+}
+
+.vscode-editor-vim-status input {
+	background: none;
+    box-shadow: none;
+    border: none;
+}

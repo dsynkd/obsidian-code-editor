@@ -129,7 +129,15 @@ export class CodeFilesSettingsTab extends PluginSettingTab {
 					await this.plugin.saveSettings();
 				}));
 
-
+		new Setting(containerEl)
+			.setName(t('VIM_MODE'))
+			.setDesc(t('VIM_MODE_DESC'))
+			.addToggle(toggle => toggle
+				.setValue(this.plugin.settings.vimMode)
+				.onChange(async (value) => {
+					this.plugin.settings.vimMode = value;
+					await this.plugin.saveSettings();
+				}));
 
 
 	}

@@ -18,6 +18,8 @@ export default {
   FILE_EXTENSIONS_DESC: 'Files with these extensions will show up in the sidebar, and will be available to create new files from. Seperated by commas. Changes to the file extensions need a restart to take effect.',
   FOLDING: 'Code block folding',
   FOLDING_DESC: 'Editor will support code block folding.',
+  VIM_MODE: 'Vim mode',
+  VIM_MODE_DESC: 'Use Vim keybindings in the Monaco editor (normal/insert/visual). A small status line shows the current mode. Reopen editors for the change to apply.',
   LINE_NUMBERS: 'Line numbers',
   LINE_NUMBERS_DESC: 'Show line numbers in the code editor.',
   MINIMAP: 'Minimap',
