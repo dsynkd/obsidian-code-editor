@@ -40,7 +40,7 @@ export function genEditorSettings(setting: EditorSettings, language: string, min
 }
 
 export function getLanguage(extension: string) {
-    switch (extension) {
+    switch (extension.toLowerCase()) {
         case "js":
         case "es6":
         case "jsx":
@@ -73,6 +73,10 @@ export function getLanguage(extension: string) {
         case "asp":
         case "aspx":
         case "jshtm":
+        case "j2":
+        case "astro":
+        case "vue":
+        case "svelte":
             return "html";
         case "cpp":
         case "c++":
@@ -137,6 +141,8 @@ export function getLanguage(extension: string) {
         case "ini":
         case "properties":
         case "gitconfig":
+        case "cfg":
+        case "toml":
             return "ini";
         case "pug":
         case "jade":
@@ -186,6 +192,8 @@ export function getLanguage(extension: string) {
             return "redis";
         case "sh":
         case "bash":
+        case "zsh":
+        case "fish":
             return "shell";
         case "scala":
         case "sc":
@@ -205,7 +213,6 @@ export function getLanguage(extension: string) {
         case "azcli":
             return "azcli";
         case "swift":
-        case "Swift":
             return "swift";
         case "flow":
             return "flow9";
@@ -307,6 +314,11 @@ export function getLanguage(extension: string) {
         case "c":
         case "h":
             return "c";
+        case "ps1":
+            return "powershell";
+        case "groovy":
+        case "gradle":
+            return "groovy";
         default:
             return "plaintext";
     }

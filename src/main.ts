@@ -1,6 +1,6 @@
 import { Plugin } from "obsidian";
 import * as monaco from "monaco-editor";
-import { DEFAULT_SETTINGS, EditorSettings } from "./common";
+import { CODE_FILE_EXTENSIONS, DEFAULT_SETTINGS, EditorSettings } from "./common";
 import { getMonacoBaseTheme } from "./ObsidianUtils";
 import { CodeEditorView } from "./codeEditorView";
 import { CreateCodeFileModal } from "./createCodeFileModal";
@@ -48,11 +48,11 @@ export default class CodeFilesPlugin extends Plugin {
 		this.registerView(viewType, leaf => new CodeEditorView(leaf, this));
 
 		try {
-			this.registerExtensions(this.settings.extensions, viewType);
+			this.registerExtensions([...CODE_FILE_EXTENSIONS], viewType);
 		} catch (e) {
 			const message = e instanceof Error ? e.message : String(e);
 			new Notification("Code Editor plugin error", {
-				body: `${message}\nThere may already be other plugins registered with the same file extension. Please change the extension in the settings of the Code Editor plugin or disable conflicting plugins.`,
+				body: `${message}\nAnother plugin may already register the same file extension. Disable the conflicting plugin or adjust its settings.`,
 			});
 		}
 
@@ -108,8 +108,8 @@ export default class CodeFilesPlugin extends Plugin {
 			if (mutation[0].addedNodes[0].className !== "popover hover-popover") return;
 			const file = this.app.metadataCache.getFirstLinkpathDest(this.hover.linkText, this.hover.sourcePath);
 			if (!file) return;
-			// check file.extension in this.settings.extensions array
-			let valid = this.settings.extensions.includes(file.extension);
+			const ext = file.extension.toLowerCase();
+			let valid = CODE_FILE_EXTENSIONS.includes(ext);
 			if (valid === false) return;
 			const fileContent = await this.app.vault.read(file);
 

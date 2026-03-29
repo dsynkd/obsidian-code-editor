@@ -9,11 +9,12 @@ import {
 	TFile,
 	TFolder
 } from "obsidian";
+import { CODE_FILE_EXTENSIONS } from "./common";
 import CodeFilesPlugin from "./main";
 
 export class CreateCodeFileModal extends Modal {
 	fileName = "My code file";
-	fileExtension = this.plugin.settings.extensions[0];
+	fileExtension = "ts";
 	parent: TAbstractFile;
 
 	constructor(private plugin: CodeFilesPlugin, parent?: TAbstractFile) {
@@ -36,10 +37,15 @@ export class CreateCodeFileModal extends Modal {
 
 		const fileExtensionInput = new DropdownComponent(contentEl);
 		fileExtensionInput.selectEl.addClass("modal_select");
-		fileExtensionInput.addOptions(this.plugin.settings.extensions.reduce((acc, ext) => {
-			acc[ext] = ext;
-			return acc;
-		}, {} as any));
+		fileExtensionInput.addOptions(
+			CODE_FILE_EXTENSIONS.reduce(
+				(acc, ext) => {
+					acc[ext] = ext;
+					return acc;
+				},
+				{} as Record<string, string>,
+			),
+		);
 		fileExtensionInput.setValue(this.fileExtension);
 		fileExtensionInput.onChange(value => this.fileExtension = value);
 

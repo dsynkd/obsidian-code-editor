@@ -46,19 +46,6 @@ export class CodeFilesSettingsTab extends PluginSettingTab {
 				}));
 
 		new Setting(containerEl)
-			.setName("File extensions")
-			.setDesc(
-				"Files with these extensions will show up in the sidebar, and will be available to create new files from. Seperated by commas. Changes to the file extensions need a restart to take effect.",
-			)
-			.addTextArea(text => text
-				.setValue(this.plugin.settings.extensions.join(","))
-				.onChange(async (value) => {
-					this.plugin.settings.extensions = value.split(",");
-					await this.plugin.saveSettings();
-				})).setClass("setting_ext");
-
-
-		new Setting(containerEl)
 			.setName("Word wrap")
 			.setDesc("Editor will wrap long lines.")
 			.addToggle(toggle => toggle
