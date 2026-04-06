@@ -48,7 +48,7 @@ export class CodeFilesSettingsTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("Add context menu")
 			.setDesc(
-				'When enabled, adds "Create Code File" and "Open in Code Editor" to the file menu.',
+				'Add "Create Code File" and "Open in Code Editor" to the file menu.',
 			)
 			.addToggle(toggle => toggle
 				.setValue(this.plugin.settings.addContextMenu)
